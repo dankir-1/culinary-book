@@ -1,0 +1,2028 @@
+/* ===== БАЗОВЫЕ СТИЛИ И ПЕРЕМЕННЫЕ ===== */
+:root {
+    --main-gradient-start: #fef9e7;
+    --main-gradient-end: #fff8e0;
+    --card-bg: rgba(255, 250, 240, 0.9);
+    --card-border: #faeacb;
+    --accent-gold: #d4a76a;
+    --accent-green: #2a4b2a;
+    --accent-green-light: #6b8c5c;
+    --text-primary: #3d2c1d;
+    --text-secondary: #8b7355;
+    --shadow-warm: rgba(180, 130, 80, 0.2);
+    --shadow-deep: rgba(160, 110, 60, 0.3);
+    --chip-bg: #f5e6d3;
+    --chip-hover: #e8d4b8;
+}
+
+/* ===== ГЛОБАЛЬНЫЕ СТИЛИ ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Georgia', serif;
+    background: linear-gradient(135deg, var(--main-gradient-start) 0%, var(--main-gradient-end) 100%);
+    min-height: 100vh;
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+/* ===== ОСНОВНОЙ КОНТЕЙНЕР ===== */
+.kitchen-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* ===== ШАПКА ===== */
+.kitchen-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.title-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.title-section h1 {
+    font-size: 2.8rem;
+    color: var(--accent-green);
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin: 0;
+    text-shadow: 2px 2px 4px var(--shadow-warm);
+}
+
+.subtitle {
+    background: var(--accent-gold);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    box-shadow: 0 4px 12px var(--shadow-warm);
+    transition: transform 0.3s ease;
+}
+
+.subtitle:hover {
+    transform: translateY(-2px);
+}
+
+.add-recipe-btn {
+    background: var(--accent-green-light);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 60px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 8px 20px var(--shadow-warm);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.add-recipe-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px var(--shadow-deep);
+    background: #5a7a4a;
+}
+
+/* ===== КАРТОЧКА ПОИСКА ===== */
+.search-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border: 2px solid var(--card-border);
+    border-radius: 48px;
+    padding: 40px;
+    box-shadow: 
+        0 20px 40px var(--shadow-warm),
+        inset 0 2px 4px rgba(255, 255, 255, 0.5);
+    transition: transform 0.3s ease;
+}
+
+.search-card:hover {
+    transform: translateY(-5px);
+}
+
+.search-container {
+    margin-bottom: 25px;
+}
+
+.search-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 60px;
+    padding: 5px;
+    box-shadow: 0 8px 20px var(--shadow-warm);
+    border: 1px solid var(--card-border);
+}
+
+.search-suggestions {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border: 2px solid var(--card-border);
+    border-radius: 20px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    max-height: 60vh;
+    max-width: 90vw;
+    width: 400px;
+    overflow-y: auto;
+    z-index: 9999;
+    backdrop-filter: blur(15px);
+    animation: slideIn 0.3s ease;
+}
+
+.suggestions-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--card-border);
+    background: var(--card-bg);
+    border-radius: 18px 18px 0 0;
+    font-weight: 500;
+    color: var(--text-primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.suggestions-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.suggestions-close:hover {
+    background: var(--chip-bg);
+    color: var(--text-primary);
+}
+
+.suggestions-list {
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+.search-suggestions.hidden {
+    display: none;
+}
+
+.suggestion-item {
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid var(--card-border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.suggestion-item:last-child {
+    border-bottom: none;
+}
+
+.suggestion-item:hover {
+    background: var(--chip-bg);
+    padding-left: 25px;
+}
+
+.suggestion-item.selected {
+    background: var(--accent-gold);
+    color: white;
+}
+
+.suggestion-icon {
+    width: 20px;
+    height: 20px;
+    opacity: 0.6;
+    flex-shrink: 0;
+}
+
+.suggestion-text {
+    flex: 1;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+}
+
+.suggestion-highlight {
+    font-weight: bold;
+    color: var(--accent-green);
+}
+
+.no-suggestions {
+    padding: 20px;
+    text-align: center;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.search-icon {
+    position: absolute;
+    left: 25px;
+    z-index: 1;
+    opacity: 0.7;
+}
+
+.search-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 20px 20px 20px 60px;
+    font-size: 1.1rem;
+    font-family: inherit;
+    color: var(--text-primary);
+    outline: none;
+}
+
+.search-input::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+.search-btn {
+    background: linear-gradient(135deg, var(--accent-gold) 0%, #e6b88a 100%);
+    color: white;
+    border: none;
+    padding: 18px 35px;
+    border-radius: 60px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin-right: 5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px var(--shadow-warm);
+}
+
+.search-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px var(--shadow-deep);
+}
+
+/* ===== ЧИПСЫ-ПОДСКАЗКИ ===== */
+.suggestions-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
+
+.chip {
+    background: var(--chip-bg);
+    color: var(--text-secondary);
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid var(--card-border);
+    font-weight: 500;
+}
+
+.chip:hover {
+    background: var(--chip-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--shadow-warm);
+}
+
+/* ===== КАРТОЧКА РЕЦЕПТА ===== */
+.recipe-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border: 2px solid var(--card-border);
+    border-radius: 48px;
+    padding: 40px;
+    box-shadow: 
+        0 20px 40px var(--shadow-warm),
+        inset 0 2px 4px rgba(255, 255, 255, 0.5);
+    animation: fadeIn 0.5s ease;
+}
+
+.recipe-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+.recipe-title {
+    color: var(--accent-green);
+    font-size: 2rem;
+    font-weight: 300;
+    margin-bottom: 30px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+/* ===== КОЛОНКА ИНГРЕДИЕНТОВ ===== */
+.ingredients-section h3,
+.instructions-section h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-primary);
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.ingredients-list {
+    list-style: none;
+}
+
+.ingredients-list li {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--card-border);
+    position: relative;
+    padding-left: 35px;
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+}
+
+.ingredients-list li:hover {
+    color: var(--text-primary);
+    padding-left: 40px;
+}
+
+.ingredients-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 10C8 11.1 8.9 12 10 12C11.1 12 12 11.1 12 10C12 8.9 11.1 8 10 8C8.9 8 8 8.9 8 10ZM16 10C16 11.1 16.9 12 18 12C19.1 12 20 11.1 20 10C20 8.9 19.1 8 18 8C16.9 8 16 8.9 16 10ZM12 16C13.1 16 14 15.1 14 14C14 12.9 13.1 12 12 12C10.9 12 10 12.9 10 14C10 15.1 10.9 16 12 16Z' fill='%23d4a76a'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.6;
+}
+
+/* ===== КОЛОНКА ИНСТРУКЦИЙ ===== */
+.instructions-list {
+    list-style: none;
+    counter-reset: step-counter;
+}
+
+.instructions-list li {
+    counter-increment: step-counter;
+    padding: 15px 0;
+    padding-left: 45px;
+    position: relative;
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    border-bottom: 1px solid var(--card-border);
+    transition: all 0.3s ease;
+}
+
+.instructions-list li:hover {
+    color: var(--text-primary);
+    padding-left: 50px;
+}
+
+.instructions-list li::before {
+    content: counter(step-counter);
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    background: var(--accent-gold);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 8px var(--shadow-warm);
+}
+
+/* ===== СООБЩЕНИЕ ОТСУТСТВИЯ РЕЦЕПТА ===== */
+.no-recipe-message {
+    text-align: center;
+    padding: 60px 40px;
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border: 2px solid var(--card-border);
+    border-radius: 48px;
+    box-shadow: 0 20px 40px var(--shadow-warm);
+}
+
+.message-content svg {
+    margin-bottom: 20px;
+    opacity: 0.7;
+}
+
+.message-content h3 {
+    color: var(--accent-green);
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    font-weight: 400;
+}
+
+.message-content p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+/* ===== МОДАЛЬНОЕ ОКНО ===== */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.modal:not(.hidden) {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: var(--card-bg);
+    backdrop-filter: blur(15px);
+    border: 2px solid var(--card-border);
+    border-radius: 48px;
+    padding: 40px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 30px 60px var(--shadow-deep);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.modal:not(.hidden) .modal-content {
+    transform: scale(1);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.modal-header h2 {
+    color: var(--accent-green);
+    font-size: 1.8rem;
+    font-weight: 300;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+    background: var(--chip-bg);
+    color: var(--text-primary);
+}
+
+/* ===== ФОРМА ДОБАВЛЕНИЯ РЕЦЕПТА ===== */
+.recipe-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-group label {
+    color: var(--text-primary);
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 16px 20px;
+    border: 2px solid var(--card-border);
+    border-radius: 15px;
+    font-size: 1rem;
+    font-family: 'Georgia', serif;
+    background: white;
+    transition: all 0.3s ease;
+    resize: vertical;
+    min-height: 60px;
+    line-height: 1.5;
+}
+
+.form-group textarea {
+    min-height: 120px;
+    font-size: 1rem;
+    padding: 16px 20px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-green);
+    box-shadow: 0 0 0 3px rgba(139, 195, 74, 0.1);
+}
+
+.form-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.cancel-btn,
+.save-btn {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 60px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cancel-btn {
+    background: var(--chip-bg);
+    color: var(--text-secondary);
+}
+
+.cancel-btn:hover {
+    background: var(--chip-hover);
+    transform: translateY(-2px);
+}
+
+.save-btn {
+    background: var(--accent-green-light);
+    color: white;
+    box-shadow: 0 8px 20px var(--shadow-warm);
+}
+
+.save-btn:hover {
+    background: #5a7a4a;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px var(--shadow-deep);
+}
+
+/* ===== СЕКЦИЯ ВСЕХ РУССКИХ РЕЦЕПТОВ ===== */
+.all-recipes-section {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border: 2px solid var(--card-border);
+    border-radius: 48px;
+    padding: 40px;
+    box-shadow: 
+        0 20px 40px var(--shadow-warm),
+        inset 0 2px 4px rgba(255, 255, 255, 0.5);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    gap: 30px;
+}
+
+.header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.love-message-small {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    background: rgba(255, 107, 107, 0.1);
+    border: 1px solid rgba(255, 107, 107, 0.3);
+    border-radius: 20px;
+    font-family: 'Georgia', serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    font-style: italic;
+    color: #ff6b6b;
+    position: relative;
+    overflow: hidden;
+}
+
+.love-message-small::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 107, 107, 0.2), transparent);
+    animation: shimmer 3s infinite;
+}
+
+.love-message-small svg {
+    animation: heartbeat 2s ease-in-out infinite;
+}
+
+.love-message-small span {
+    position: relative;
+    z-index: 1;
+}
+
+.favorites-btn {
+    background: white;
+    border: 2px solid var(--card-border);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px var(--shadow-warm);
+    position: relative;
+}
+
+.favorites-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px var(--shadow-deep);
+    border-color: var(--accent-gold);
+}
+
+.favorites-btn svg {
+    transition: all 0.3s ease;
+    width: 24px;
+    height: 24px;
+}
+
+.favorites-btn:hover svg {
+    transform: scale(1.1);
+    fill: #ffd700;
+    stroke: #ffd700;
+}
+
+.add-recipe-btn-small {
+    background: linear-gradient(135deg, var(--accent-green-light) 0%, #6b8c5c 100%);
+    border: none;
+    border-radius: 40px;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 15px var(--shadow-warm);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.add-recipe-btn-small:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px var(--shadow-deep);
+}
+
+.section-header h2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    color: var(--accent-green);
+    font-size: 2rem;
+    font-weight: 300;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.section-description {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    font-style: italic;
+    margin: 0;
+}
+
+.recipes-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.recipes-counter {
+    background: var(--chip-bg);
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    border: 1px solid var(--card-border);
+    font-weight: 500;
+}
+
+.recipes-counter span {
+    color: var(--accent-green);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.clear-storage-btn {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0.8;
+}
+
+.clear-storage-btn:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+}
+
+.all-recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.russian-recipe-card {
+    background: white;
+    border: 2px solid var(--card-border);
+    border-radius: 30px;
+    padding: 25px;
+    box-shadow: 0 10px 25px var(--shadow-warm);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.russian-recipe-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px var(--shadow-deep);
+    border-color: var(--accent-gold);
+}
+
+.russian-recipe-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-gold), var(--accent-green-light));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.russian-recipe-card:hover::before {
+    opacity: 1;
+}
+
+.russian-recipe-header {
+    margin-bottom: 15px;
+}
+
+.russian-recipe-title {
+    color: var(--accent-green);
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+.russian-recipe-meta {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.russian-recipe-time,
+.russian-recipe-servings {
+    background: var(--chip-bg);
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    border: 1px solid var(--card-border);
+}
+
+.russian-recipe-time {
+    background: linear-gradient(135deg, #f0e6d2 0%, #e8d4b8 100%);
+}
+
+.russian-recipe-servings {
+    background: linear-gradient(135deg, #e6f3e6 0%, #d4e6d4 100%);
+}
+
+.russian-recipe-preview {
+    margin-top: 15px;
+}
+
+.russian-recipe-ingredients-preview {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    max-height: 60px;
+    overflow: hidden;
+    position: relative;
+}
+
+.russian-recipe-ingredients-preview::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: linear-gradient(transparent, white);
+}
+
+.russian-recipe-footer {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid var(--card-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.russian-recipe-source {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+.recipe-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.favorite-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.favorite-btn:hover {
+    background: var(--chip-bg);
+    transform: scale(1.1);
+}
+
+.favorite-btn.active svg {
+    fill: #ffd700;
+    stroke: #ffd700;
+    filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.6));
+}
+
+.favorite-btn svg {
+    transition: all 0.3s ease;
+    fill: var(--text-secondary);
+    stroke: var(--text-secondary);
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+}
+
+.delete-btn:hover {
+    background: rgba(255, 107, 107, 0.1);
+    transform: scale(1.1);
+}
+
+.delete-btn svg {
+    width: 16px;
+    height: 16px;
+    transition: all 0.3s ease;
+}
+
+.delete-btn:hover svg {
+    stroke: #ff6b6b;
+    transform: rotate(90deg);
+}
+
+.view-recipe-btn {
+    background: linear-gradient(135deg, var(--accent-gold) 0%, #e6b88a 100%);
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(212, 167, 106, 0.3);
+}
+
+.view-recipe-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(212, 167, 106, 0.4);
+}
+
+/* ===== СТИЛИ ДЛЯ ИЗБРАННЫХ РЕЦЕПТОВ ===== */
+.favorites-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    max-height: 500px;
+    overflow-y: auto;
+    padding: 20px 0;
+}
+
+.favorite-recipe-card {
+    background: white;
+    border: 2px solid var(--card-border);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 8px 20px var(--shadow-warm);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.favorite-recipe-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px var(--shadow-deep);
+    border-color: var(--accent-gold);
+}
+
+.favorite-recipe-title {
+    color: var(--accent-green);
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.favorite-recipe-preview {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    max-height: 60px;
+    overflow: hidden;
+}
+
+.no-favorites-message {
+    text-align: center;
+    padding: 60px 40px;
+    color: var(--text-secondary);
+}
+
+.no-favorites-message h3 {
+    color: var(--accent-green);
+    margin: 20px 0 10px;
+    font-size: 1.3rem;
+}
+
+.no-favorites-message p {
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+/* ===== МОДАЛЬНОЕ ОКНО ПОДТВЕРЖДЕНИЯ УДАЛЕНИЯ ===== */
+.modal-content.small {
+    max-width: 400px;
+}
+
+.delete-confirm-content {
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.delete-confirm-content svg {
+    margin-bottom: 20px;
+}
+
+.delete-confirm-content h3 {
+    color: var(--accent-green);
+    margin: 0 0 10px;
+    font-size: 1.2rem;
+}
+
+.delete-confirm-content p {
+    color: var(--text-secondary);
+    margin: 0 0 25px;
+    font-size: 1rem;
+}
+
+.delete-confirm-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.confirm-delete-btn {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+}
+
+.confirm-delete-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 107, 107, 0.4);
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        gap: 20px;
+        padding: 0 15px;
+        align-items: flex-start;
+    }
+    
+    .header-left {
+        width: 100%;
+        align-items: flex-start;
+    }
+    
+    .header-right {
+        width: 100%;
+        justify-content: flex-end;
+    }
+    
+    .love-message-small {
+        font-size: 0.8rem;
+        padding: 4px 12px;
+        gap: 6px;
+    }
+    
+    .love-message-small svg {
+        width: 14px;
+        height: 14px;
+    }
+    
+    .search-input-wrapper {
+        flex-direction: column;
+        padding: 10px;
+    }
+    
+    .search-input {
+        width: 100%;
+        padding: 15px 15px 15px 45px;
+        border: 1px solid var(--card-border);
+        border-radius: 30px;
+        margin-bottom: 10px;
+    }
+    
+    .search-icon {
+        left: 25px;
+        top: 25px;
+    }
+    
+    .search-btn {
+        width: 100%;
+        margin: 0;
+        padding: 15px;
+    }
+    
+    .suggestions-chips {
+        gap: 8px;
+    }
+    
+    .chip {
+        font-size: 0.8rem;
+        padding: 8px 15px;
+    }
+    
+    .all-recipes-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .section-header h2 {
+        font-size: 1.5rem;
+        flex-wrap: wrap;
+    }
+    
+    .recipes-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+    
+    .recipes-counter {
+        text-align: center;
+    }
+    
+    .russian-recipe-card {
+        padding: 15px;
+    }
+    
+    .russian-recipe-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .recipe-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .view-recipe-btn {
+        flex: 1;
+        text-align: center;
+    }
+    
+    /* Все модальные окна */
+    .modal-content {
+        width: 95%;
+        padding: 20px;
+        max-height: 90vh;
+    }
+    
+    .modal-header h2 {
+        font-size: 1.3rem;
+    }
+    
+    /* Форма добавления */
+    .form-group input,
+    .form-group textarea {
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .cancel-btn,
+    .save-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    /* Избранное */
+    .favorites-grid {
+        grid-template-columns: 1fr;
+        max-height: 60vh;
+    }
+    
+    .favorite-recipe-card {
+        padding: 12px;
+    }
+    
+    /* Подтверждение удаления */
+    .delete-confirm-content {
+        padding: 15px;
+    }
+    
+    .delete-confirm-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .confirm-delete-btn,
+    .cancel-btn {
+        width: 100%;
+    }
+    
+    .recipe-actions {
+        flex-wrap: wrap;
+    }
+}
+.hidden {
+    display: none !important;
+}
+
+/* ===== АНИМАЦИИ ===== */
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -45%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* ===== УЛУЧШЕНИЯ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ И IPHONE ===== */
+
+/* Оптимизация сенсорных элементов */
+@media (hover: none) and (pointer: coarse) {
+    .chip,
+    .search-btn,
+    .add-recipe-btn-small,
+    .favorites-btn,
+    .favorite-btn,
+    .delete-btn,
+    .view-recipe-btn,
+    .close-btn,
+    .cancel-btn,
+    .save-btn,
+    .confirm-delete-btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    .search-btn:hover,
+    .chip:hover,
+    .add-recipe-btn-small:hover,
+    .favorites-btn:hover,
+    .favorite-btn:hover,
+    .delete-btn:hover,
+    .view-recipe-btn:hover,
+    .close-btn:hover,
+    .cancel-btn:hover,
+    .save-btn:hover,
+    .confirm-delete-btn:hover {
+        transform: none;
+    }
+    
+    .search-btn:active,
+    .chip:active,
+    .add-recipe-btn-small:active,
+    .favorites-btn:active,
+    .favorite-btn:active,
+    .delete-btn:active,
+    .view-recipe-btn:active,
+    .close-btn:active,
+    .cancel-btn:active,
+    .save-btn:active,
+    .confirm-delete-btn:active {
+        transform: scale(0.95);
+        opacity: 0.8;
+    }
+}
+
+/* Предотвращение двойного тапа для zoom */
+* {
+    touch-action: manipulation;
+}
+
+/* Улучшение прокрутки на iOS */
+.modal-content,
+.all-recipes-grid,
+.favorites-grid {
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Исправление проблем с вводом на iOS */
+input,
+textarea,
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+
+/* Улучшение читаемости на мобильных устройствах */
+body {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+/* Предотвращение выделения текста при клике на кнопки */
+button,
+.btn {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Оптимизация для Retina дисплеев */
+@media 
+(-webkit-min-device-pixel-ratio: 2), 
+(min-resolution: 192dpi) {
+    .search-icon,
+    .favorites-btn svg,
+    .love-message-small svg {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* Специальные исправления для iPhone */
+@supports (-webkit-touch-callout: none) {
+    .kitchen-container {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+    
+    .modal-content {
+        padding-bottom: calc(25px + env(safe-area-inset-bottom));
+    }
+    
+    body {
+        padding-top: env(safe-area-inset-top);
+}
+
+/* ===== АДАПТИВНОСТЬ ДЛЯ IPHONE И МОБИЛЬНЫХ УСТРОЙСТВ ===== */
+
+/* iPhone и маленькие мобильные устройства */
+@media (max-width: 414px) {
+.kitchen-container {
+    padding: 15px 10px;
+    gap: 20px;
+}
+
+.header-content {
+    flex-direction: column;
+    gap: 15px;
+    padding: 0 10px;
+    align-items: stretch;
+}
+
+.header-left {
+    align-items: center;
+    text-align: center;
+}
+
+.title {
+    font-size: 1.8rem !important;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    font-size: 0.75rem !important;
+    padding: 6px 15px !important;
+}
+
+.love-message-small {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    gap: 5px;
+}
+
+.love-message-small svg {
+    width: 12px;
+    height: 12px;
+}
+
+.header-right {
+    justify-content: center;
+    gap: 10px;
+}
+
+.favorites-btn {
+    width: 45px;
+    height: 45px;
+}
+
+.favorites-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.add-recipe-btn-small {
+    font-size: 0.8rem;
+    padding: 8px 15px;
+}
+
+.search-card {
+    padding: 20px 15px;
+    border-radius: 25px;
+}
+
+.search-input-wrapper {
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 25px;
+    padding: 8px;
+}
+
+.search-input {
+    padding: 12px 15px 12px 40px;
+    font-size: 1rem;
+}
+
+.search-icon {
+    left: 15px;
+    width: 20px;
+    height: 20px;
+}
+
+.search-btn {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+    margin-right: 0;
+}
+
+.search-suggestions {
+    width: 95vw;
+    max-width: 350px;
+    max-height: 70vh;
+}
+
+.suggestions-header {
+    padding: 12px 15px;
+}
+
+.suggestions-close {
+    width: 25px;
+    height: 25px;
+    font-size: 1.2rem;
+}
+
+.suggestion-item {
+    padding: 10px 15px;
+}
+
+.suggestions-chips {
+    gap: 8px;
+}
+
+.chip {
+    font-size: 0.75rem;
+    padding: 6px 12px;
+    border-radius: 15px;
+}
+
+.recipe-card {
+    padding: 20px 15px;
+    border-radius: 25px;
+}
+
+.recipe-content {
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.recipe-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.ingredients-list li,
+.instructions-list li {
+    font-size: 0.95rem;
+    padding: 10px 0;
+}
+
+.ingredients-list li {
+    padding-left: 30px;
+}
+
+.instructions-list li {
+    padding-left: 40px;
+}
+
+.instructions-list li::before {
+    width: 25px;
+    height: 25px;
+    font-size: 0.8rem;
+}
+
+.all-recipes-section {
+    padding: 20px 15px;
+    border-radius: 25px;
+}
+
+.section-header h2 {
+    font-size: 1.6rem;
+    gap: 10px;
+}
+
+.section-description {
+    font-size: 1rem;
+}
+
+.all-recipes-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.russian-recipe-card {
+    padding: 18px;
+    border-radius: 20px;
+}
+
+.russian-recipe-title {
+    font-size: 1.1rem;
+}
+
+.russian-recipe-time,
+.russian-recipe-servings {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+}
+
+.russian-recipe-ingredients-preview {
+    font-size: 0.85rem;
+}
+
+.modal-content {
+    padding: 25px 20px;
+    border-radius: 25px;
+    width: 95%;
+    max-height: 85vh;
+}
+
+.modal-header h2 {
+    font-size: 1.4rem;
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 12px 15px;
+    font-size: 0.95rem;
+}
+
+.form-actions {
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cancel-btn,
+.save-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 20px;
+}
+
+.favorites-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    max-height: 60vh;
+}
+
+.favorite-recipe-card {
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.favorite-recipe-title {
+    font-size: 1rem;
+}
+
+.favorite-recipe-preview {
+    font-size: 0.8rem;
+}
+
+.no-recipe-message,
+.no-favorites-message {
+    padding: 40px 20px;
+    border-radius: 25px;
+}
+
+.message-content h3,
+.no-favorites-message h3 {
+    font-size: 1.2rem;
+}
+
+.message-content p,
+.no-favorites-message p {
+    font-size: 0.95rem;
+}
+    
+    .favorites-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .search-btn {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+        margin-right: 0;
+    }
+    
+    .search-suggestions {
+        width: 95vw;
+        max-width: 350px;
+        max-height: 70vh;
+    }
+    
+    .suggestions-header {
+        padding: 12px 15px;
+    }
+    
+    .suggestions-close {
+        width: 25px;
+        height: 25px;
+        font-size: 1.2rem;
+    }
+    
+    .suggestion-item {
+        padding: 10px 15px;
+    }
+    
+    .suggestions-chips {
+        gap: 8px;
+    }
+    
+    .chip {
+        font-size: 0.75rem;
+        padding: 6px 12px;
+        border-radius: 15px;
+    }
+    
+    .recipe-card {
+        padding: 20px 15px;
+        border-radius: 25px;
+    }
+    
+    .recipe-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .recipe-title {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+    
+    .ingredients-list li,
+    .instructions-list li {
+        font-size: 0.95rem;
+        padding: 10px 0;
+    }
+    
+    .ingredients-list li {
+        padding-left: 30px;
+    }
+    
+    .instructions-list li {
+        padding-left: 40px;
+    }
+    
+    .instructions-list li::before {
+        width: 25px;
+        height: 25px;
+        font-size: 0.8rem;
+    }
+    
+    .all-recipes-section {
+        padding: 20px 15px;
+        border-radius: 25px;
+    }
+    
+    .section-header h2 {
+        font-size: 1.6rem;
+        gap: 10px;
+    }
+    
+    .section-description {
+        font-size: 1rem;
+    }
+    
+    .all-recipes-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        margin-top: 20px;
+    }
+    
+    .russian-recipe-card {
+        padding: 18px;
+        border-radius: 20px;
+    }
+    
+    .russian-recipe-title {
+        font-size: 1.1rem;
+    }
+    
+    .russian-recipe-time,
+    .russian-recipe-servings {
+        font-size: 0.75rem;
+        padding: 4px 10px;
+    }
+    
+    .russian-recipe-ingredients-preview {
+        font-size: 0.85rem;
+    }
+    
+    .modal-content {
+        padding: 25px 20px;
+        border-radius: 25px;
+        width: 95%;
+        max-height: 85vh;
+    }
+    
+    .modal-header h2 {
+        font-size: 1.4rem;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        padding: 12px 15px;
+        font-size: 0.95rem;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .cancel-btn,
+    .save-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 12px 20px;
+    }
+    
+    .favorites-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        max-height: 60vh;
+    }
+    
+    .favorite-recipe-card {
+        padding: 15px;
+        border-radius: 15px;
+    }
+    
+    .favorite-recipe-title {
+        font-size: 1rem;
+    }
+    
+    .favorite-recipe-preview {
+        font-size: 0.8rem;
+    }
+    
+    .no-recipe-message,
+    .no-favorites-message {
+        padding: 40px 20px;
+        border-radius: 25px;
+    }
+    
+    .message-content h3,
+    .no-favorites-message h3 {
+        font-size: 1.2rem;
+    }
+    
+    .message-content p,
+    .no-favorites-message p {
+        font-size: 0.95rem;
+    }
+}
+
+/* Очень маленькие экраны (iPhone SE и подобные) */
+@media (max-width: 375px) {
+    .title {
+        font-size: 1.6rem !important;
+    }
+    
+    .subtitle {
+        font-size: 0.7rem !important;
+        padding: 5px 12px !important;
+    }
+    
+    .search-card,
+    .recipe-card,
+    .all-recipes-section {
+        padding: 15px 12px;
+    }
+    
+    .kitchen-container {
+        padding: 12px 8px;
+    }
+    
+    .chip {
+        font-size: 0.7rem;
+        padding: 5px 10px;
+    }
+    
+    .russian-recipe-card {
+        padding: 15px;
+    }
+    
+    .modal-content {
+        padding: 20px 15px;
+    }
+}
+
+/* Горизонтальная ориентация для мобильных */
+@media (max-height: 500px) and (orientation: landscape) {
+    .kitchen-container {
+        padding: 10px 15px;
+        gap: 15px;
+    }
+    
+    .header-content {
+        flex-direction: row;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .title {
+        font-size: 1.5rem;
+    }
+    
+    .search-card {
+        padding: 15px;
+    }
+    
+    .recipe-card {
+        padding: 15px;
+    }
+    
+    .modal-content {
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .search-card {
+        padding: 15px;
+    }
+    
+    .recipe-card {
+        padding: 15px;
+    }
+    
+    .recipe-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .ingredients-list li,
+    .instructions-list li {
+        font-size: 0.9rem;
+        padding: 8px 0 8px 30px;
+    }
+    
+    .title {
+        font-size: 1.5rem !important;
+    }
+    
+    .subtitle {
+        font-size: 0.7rem !important;
+        padding: 4px 10px !important;
+    }
+    
+    .love-message-small {
+        font-size: 0.7rem;
+        padding: 4px 8px;
+    }
+    
+    .add-recipe-btn {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .chip {
+        font-size: 0.8rem;
+        padding: 8px 15px;
+    }
+}
+
+/* ===== ФИНАЛЬНЫЕ УЛУЧШЕНИЯ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ ===== */
+
+/* Safe Area для iPhone */
+@supports (padding: max(0px)) {
+    .kitchen-container {
+        padding-left: max(20px, env(safe-area-inset-left));
+        padding-right: max(20px, env(safe-area-inset-right));
+        padding-bottom: max(20px, env(safe-area-inset-bottom));
+    }
+    
+    .modal-content {
+        padding-bottom: max(25px, env(safe-area-inset-bottom));
+    }
+}
+
+/* Улучшение касаний */
+@media (hover: none) and (pointer: coarse) {
+    button,
+    .chip,
+    .favorite-btn,
+    .delete-btn,
+    .view-recipe-btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    button:hover {
+        transform: none;
+    }
+    
+    button:active {
+        transform: scale(0.95);
+    }
+}
+
+/* Исправление горизонтальной ориентации */
+@media (max-height: 500px) and (orientation: landscape) {
+    .kitchen-container {
+        padding: 10px;
+    }
+    
+    .modal-content {
+        max-height: 85vh;
+        overflow-y: auto;
+    }
+}

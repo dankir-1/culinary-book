@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Кулинарная книга - уютные домашние рецепты</title>
+    <link rel="stylesheet" href="culinary-book.css">
+</head>
+<body>
+    <!-- Основной контейнер -->
+    <main class="kitchen-container">
+        <!-- Шапка с заголовком и кнопкой добавления -->
+        <header class="header">
+            <div class="header-content">
+                <div class="header-left">
+                    <h1 class="title">
+                        🍳 Кулинарная книга
+                        <span class="subtitle">простые рецепты</span>
+                    </h1>
+                    <div class="love-message-small">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <path d="M20.84 4.61C20.3292 4.099 19.7228 3.69853 19.0584 3.4321C18.394 3.16567 17.6843 3.03802 16.97 3.056C16.2557 3.03802 15.546 3.16567 14.8816 3.4321C14.2172 3.69853 13.6108 4.099 13.1 4.61L12 5.71L10.9 4.61C9.86244 3.57244 8.47488 2.98902 7.03 3.056C5.58512 2.98902 4.19756 3.57244 3.16 4.61C2.12244 5.64756 1.53902 7.03512 1.606 8.48C1.53902 9.92488 2.12244 11.3124 3.16 12.35L12 21.23L20.84 12.35C21.8776 11.3124 22.461 9.92488 22.394 8.48C22.461 7.03512 21.8776 5.64756 20.84 4.61Z" 
+                                  fill="#ff6b6b" opacity="0.8"/>
+                        </svg>
+                        <span>с любовью для мамы</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <path d="M20.84 4.61C20.3292 4.099 19.7228 3.69853 19.0584 3.4321C18.394 3.16567 17.6843 3.03802 16.97 3.056C16.2557 3.03802 15.546 3.16567 14.8816 3.4321C14.2172 3.69853 13.6108 4.099 13.1 4.61L12 5.71L10.9 4.61C9.86244 3.57244 8.47488 2.98902 7.03 3.056C5.58512 2.98902 4.19756 3.57244 3.16 4.61C2.12244 5.64756 1.53902 7.03512 1.606 8.48C1.53902 9.92488 2.12244 11.3124 3.16 12.35L12 21.23L20.84 12.35C21.8776 11.3124 22.461 9.92488 22.394 8.48C22.461 7.03512 21.8776 5.64756 20.84 4.61Z" 
+                                  fill="#ff6b6b" opacity="0.8"/>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="header-right">
+                    <!-- Кнопка избранного -->
+                    <button id="favoritesBtn" class="favorites-btn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" 
+                                  fill="#d4a76a" stroke="#d4a76a" stroke-width="1"/>
+                        </svg>
+                    </button>
+                    
+                    <!-- Кнопка добавления рецепта -->
+                    <button id="addRecipeBtn" class="add-recipe-btn-small">
+                        ➕ Добавить рецепт
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Поиск и чипсы -->
+        <section class="search-card">
+            <div class="search-container">
+                <div class="search-input-wrapper">
+                    <svg class="search-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" 
+                              stroke="#8b7355" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        placeholder="Поиск рецептов..."
+                        class="search-input"
+                        autocomplete="off"
+                    >
+                    <button id="searchBtn" class="search-btn">
+                        🔍 Найти
+                    </button>
+                </div>
+                
+                <!-- Выпадающий список подсказок -->
+                <div id="searchSuggestions" class="search-suggestions hidden">
+                    <div class="suggestions-header">
+                        <span>🔍 Найденные рецепты</span>
+                        <button class="suggestions-close" onclick="closeSuggestions()">✕</button>
+                    </div>
+                    <div class="suggestions-list">
+                        <!-- Подсказки будут добавлены через JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Чипсы-подсказки -->
+            <div class="suggestions-chips">
+                <span class="chip">Борщ</span>
+                <span class="chip">Оливье</span>
+                <span class="chip">Пельмени</span>
+                <span class="chip">Блины</span>
+                <span class="chip">Гречка</span>
+                <span class="chip">Котлеты</span>
+            </div>
+        </section>
+
+        <!-- Карточка с результатами поиска -->
+        <section id="recipeCard" class="recipe-card hidden">
+            <div class="recipe-content">
+                <!-- Левая колонка - ингредиенты -->
+                <div class="ingredients-column">
+                    <h2 class="recipe-title" id="recipeTitle">Название рецепта</h2>
+                    
+                    <div class="ingredients-section">
+                        <h3>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2L2 7V12C2 16.5 4.23 20.68 7.62 23.15L12 24L16.38 23.15C19.77 20.68 22 16.5 22 12V7L12 2Z" 
+                                      fill="#8b7355"/>
+                            </svg>
+                            Ингредиенты
+                        </h3>
+                        <ul id="ingredientsList" class="ingredients-list">
+                            <!-- Ингредиенты будут добавлены через JS -->
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Правая колонка - инструкция -->
+                <div class="instructions-column">
+                    <div class="instructions-section">
+                        <h3>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M9 11H7V13H9V11ZM13 11H11V13H13V11ZM17 11H15V13H17V11ZM19 4H18V2H16V4H8V2H6V4H5C3.89 4 3.01 4.9 3.01 6L3 20C3 21.1 3.89 22 5 22H19C20.1 22 21 21.1 21 20V6C21 4.9 20.1 4 19 4ZM19 20H5V9H19V20Z" 
+                                      fill="#8b7355"/>
+                            </svg>
+                            Пошаговая инструкция
+                        </h3>
+                        <ol id="instructionsList" class="instructions-list">
+                            <!-- Шаги будут добавлены через JS -->
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция со всеми русскими рецептами -->
+        <section class="all-recipes-section">
+            <div class="section-header">
+                <h2>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 2L2 7V12C2 16.5 4.23 20.68 7.62 23.15L12 24L16.38 23.15C19.77 20.68 22 16.5 22 12V7L12 2Z" 
+                              fill="#d4a76a"/>
+                    </svg>
+                    Все русские рецепты
+                </h2>
+                <p class="section-description">Более 30 традиционных русских блюд для вашей кухни</p>
+            </div>
+            
+            <div class="recipes-controls">
+                <div class="recipes-counter">
+                    <span id="allRecipesCount">0</span> рецептов доступно
+                </div>
+            </div>
+            
+            <div id="allRecipesGrid" class="all-recipes-grid">
+                <!-- Карточки русских рецептов будут добавлены через JS -->
+            </div>
+        </section>
+
+        <!-- Сообщение об отсутствии рецепта -->
+        <div id="noRecipeMessage" class="no-recipe-message hidden">
+            <div class="message-content">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z" 
+                          fill="#d4a76a"/>
+                </svg>
+                <h3>Рецепт не найден</h3>
+                <p>Попробуйте поискать другое блюдо или добавьте свой рецепт</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Модальное окно добавления рецепта -->
+    <div id="addRecipeModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>➕ Добавить свой рецепт</h2>
+                <button id="closeModalBtn" class="close-btn">✕</button>
+            </div>
+            <form id="recipeForm" class="recipe-form">
+                <div class="form-group">
+                    <label for="recipeName">Название рецепта</label>
+                    <input type="text" id="recipeName" required placeholder="Например: Мамин пирог">
+                </div>
+                <div class="form-group">
+                    <label for="recipeIngredients">Ингредиенты (каждый с новой строки)</label>
+                    <textarea id="recipeIngredients" required placeholder="Мука - 300 г&#10;Яйца - 3 шт&#10;Сахар - 200 г" rows="8"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="recipeSteps">Пошаговая инструкция (каждый шаг с новой строки)</label>
+                    <textarea id="recipeSteps" required placeholder="1. Смешайте муку с сахаром&#10;2. Добавьте яйца&#10;3. Выпекайте 30 минут" rows="10"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" id="cancelBtn" class="cancel-btn">Отмена</button>
+                    <button type="submit" class="save-btn">💾 Сохранить рецепт</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модальное окно избранных рецептов -->
+    <div id="favoritesModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>⭐ Мои любимые рецепты</h2>
+                <button id="closeFavoritesBtn" class="close-btn">✕</button>
+            </div>
+            <div id="favoritesGrid" class="favorites-grid">
+                <!-- Избранные рецепты будут добавлены через JS -->
+            </div>
+            <div id="noFavoritesMessage" class="no-favorites-message">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" 
+                          fill="#d4a76a" opacity="0.3"/>
+                </svg>
+                <h3>У вас пока нет любимых рецептов</h3>
+                <p>Нажмите на звёздочку у рецепта, чтобы добавить его в избранное</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно подтверждения удаления -->
+    <div id="deleteConfirmModal" class="modal hidden">
+        <div class="modal-content small">
+            <div class="modal-header">
+                <h2>🗑️ Удаление рецепта</h2>
+                <button id="closeDeleteConfirmBtn" class="close-btn">✕</button>
+            </div>
+            <div class="delete-confirm-content">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z" 
+                          fill="#ff6b6b"/>
+                </svg>
+                <h3>Вы уверены, что хотите удалить этот рецепт?</h3>
+                <p id="deleteRecipeName">Название рецепта</p>
+                <div class="delete-confirm-actions">
+                    <button id="cancelDeleteBtn" class="cancel-btn">Отмена</button>
+                    <button id="confirmDeleteBtn" class="confirm-delete-btn">Удалить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="culinary-book.js"></script>
+</body>
+</html>
